@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Bright Idea</h2>
+    </div>
+    <div class="col-md-4">
+      <a href="/ideas">Bright ideas</a> | <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <br>
+  <br>
+    <div style="border: solid black 2px">
+      <h3> <%= @bright.user.alias%> says: <%= @bright.content %></h3>
+    </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <p>People who liked this post:</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Alias</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bright.idea_like1.uniq.each do |user|%>
+        <tr>
+          <td><a href="/ideas/<%= user.id%>"><%= user.alias %></a></td>
+          <td><%= user.name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+</body>

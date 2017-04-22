@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      Hi! <%= current_user.name%> | <%= current_user.alias%>
+    </div>
+    <div class="col-md-2">
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class='row'>
+      <div class='col-md-12'>
+        <h1>Got any bright ideas <%= current_user.name %>?</h1>
+        <div class="form-group">
+          <form action="/ideas" method="post">
+            <input type='hidden' name="authenticity_token" value="<%= form_authenticity_token %>">
+            <% if flash[:errors] %>
+            	<% flash[:errors].each do |e| %>
+            		<p><%= e %></p>
+            	<% end %>
+            <% end %>
+            <label for="Secret">| Bright Ideas |</label>
+            <textarea class="form-control" rows="5" id="comment" name="ideas[content]" placeholder="Enter your ideas.." wrap="soft"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary">Tell errrybody</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+    <% @bright.each do |post| %>
+      <div style="border: solid black 2px">
+          <h5><a href="/ideas/<%= post.user.id%>"><%= post.user.alias%></a> says:</h5>
+          <p><%= post.content %></p>
+        <% if current_user == post.user %>
+            <form action="/ideas/<%= post.id%>" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" class="btn btn-warning btn-xs" value="Delete">
+            </form>
+        <% end %>
+    </div>
+        <h5><a href="/users/<%= current_user.id %>/ideas/<%= post.id%>/like">Like</a> | <a href="/ideas/<%= post.id%>"><%= post.likes.count%> people</a> like this.</h5>
+        <br>
+        <br>
+  <% end %>
+
+    </div>
+  </div>
+
+
+</div>

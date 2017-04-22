@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Users Dashboard</h2>
+    </div>
+    <div class="col-md-4">
+      <a href="/ideas">Bright ideas</a> | <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <p>Logic will take you from A to B, but imagination will take you anywhere. -A Einstein</p>
+  <br>
+  <hr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name: <%= current_user.name %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Alias: <%= current_user.alias %></th>
+      </tr>
+      <tr>
+        <th>Email: <%= current_user.email %></th>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <hr>
+  <table>
+    <tr>
+      <th> Total Number of Posts: <%= current_user.ideas.count %> </th>
+    </tr>
+    <tr>
+      <th> Total Number of Likes: <%= current_user.likes.count %></th>
+    </tr>
+  </table>
+</div>
